@@ -1,9 +1,28 @@
+import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:new_learn/core/styling/app_styles.dart';
 import 'package:new_learn/core/widgets/credit_card_widget.dart';
 
-class CardsScreen extends StatelessWidget {
+class CardsScreen extends StatefulWidget {
   const CardsScreen({super.key});
+
+  @override
+  State<CardsScreen> createState() => _CardsScreenState();
+}
+
+class _CardsScreenState extends State<CardsScreen> {
+  Future<void> saveFcmToken(String token) async {
+    var prefs = await EncryptedSharedPreferences.getInstance();
+    await prefs.setString("fcm_token", token);
+    debugPrint(" FCM token saved securely: $token");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    saveFcmToken("example_fcm_token_12345");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +31,13 @@ class CardsScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
           backgroundColor: Colors.white,
-
           elevation: 0,
           automaticallyImplyLeading: false,
-          title: Text("All Cards",style:AppStyles.black18boldStyles.copyWith(
-                          fontSize: 18,color: Colors.black
-        
+          title: Text(
+            "All Cards",
+            style: AppStyles.black18boldStyles.copyWith(
+              fontSize: 18,
+              color: Colors.black,
             ),
           ),
           centerTitle: true,
@@ -41,7 +61,8 @@ class CardsScreen extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.more_horiz, color: Colors.black),
                   onPressed: () {
-                    // Do something
+                    // Test reading the token
+                    readFcmToken();
                   },
                 ),
               ),
@@ -49,7 +70,7 @@ class CardsScreen extends StatelessWidget {
           ],
         ),
       ),
-       body: ListView(
+      body: ListView(
         children: const [
           CreditCardWidget(
             balance: "23400",
@@ -67,5 +88,10 @@ class CardsScreen extends StatelessWidget {
       ),
     );
   }
-}
 
+  Future<void> readFcmToken() async {
+    var prefs = await EncryptedSharedPreferences.getInstance();
+    String? token = await prefs.getString("fcm_token");
+    debugPrint(" Stored FCM Token: $token");
+  }
+}
