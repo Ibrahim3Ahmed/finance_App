@@ -18,14 +18,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  
-  // Fixed: Now has exactly 5 screens to match the 5 BottomNavigationBar items
+
   final List<Widget> screens = [
     HomePageScreen(), // Home
     StatisticsScreen(),   // Statistics
     Container(width: double.infinity, height: double.infinity, color: Colors.green),  // Plus
        CardsScreen(),
-  // My card
+
     ProfilePage()// Profile
   ];
   
@@ -34,9 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
     // Debug: Print current values
     debugPrint("currentIndex: $currentIndex, screens.length: ${screens.length}");
     
-    return SafeArea(
-      child: Scaffold(
-        body: currentIndex < screens.length ? screens[currentIndex] : screens[0],
+    return  Scaffold(
+        body:
+
+        currentIndex < screens.length ? screens[currentIndex] : screens[0],
+
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed, // Essential for 5+ items
           backgroundColor: Colors.white,
@@ -87,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-      ),
+
     );
   }
 }

@@ -19,25 +19,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: const Color(0xFFF5F5F5),
         resizeToAvoidBottomInset: true,
         body: LayoutBuilder(
@@ -48,11 +33,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Form(
-                    key: _formKey,
+
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(height: 24.h),
+
                           const BackButtonWidget(),
                           SizedBox(height: 24.h),
                           Text(
@@ -65,10 +52,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           SizedBox(height: 40.h),
-                      
+
                           // Username Field
                           CustomTextFiled(
-                            controller: _usernameController,
                             hintText: 'Username',
                             keyboardType: TextInputType.name,
                             inputFormatters: [
@@ -76,82 +62,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 RegExp(r"[a-zA-Z؀-ۿ\s]"),
                               ),
                             ],
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'This field is required';
-                              }
-                              return null;
-                            },
                           ),
                           SizedBox(height: 16.h),
-                      
+
                           // Email Field
                           CustomTextFiled(
-                            controller: _emailController,
                             hintText: 'Email',
                             keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'This field is required';
-                              }
-                              if (!value.contains('@')) {
-                                return 'Enter a valid email';
-                              }
-                              return null;
-                            },
                           ),
                           SizedBox(height: 16.h),
-                      
+
                           // Password Field
                           CustomTextFiled(
-                            controller: _passwordController,
                             hintText: 'Password',
                             obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'This field is required';
-                              }
-                              if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
-                              }
-                              return null;
-                            },
                           ),
                           SizedBox(height: 16.h),
-                      
+
                           // Confirm Password Field
                           CustomTextFiled(
-                            controller: _confirmPasswordController,
                             hintText: 'Confirm password',
                             obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'This field is required';
-                              }
-                              if (value != _passwordController.text) {
-                                return 'Passwords do not match';
-                              }
-                              return null;
-                            },
                           ),
                           SizedBox(height: 32.h),
-                      
+
                           // Register Button
                           PrimayButtonWidget(
                             buttonText: "Register",
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                print(
-                                  'Register data: ${_usernameController.text}, ${_emailController.text}',
-                                );
-                              }
                             },
                           ),
                           SizedBox(height: 32.h),
-                      
+
                           _buildDivider(),
                           SizedBox(height: 24.h),
-                      
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -160,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               _buildSocialIcon('assets/icons/apple.svg'),
                             ],
                           ),
-                      
+
                           SizedBox(height: 32.h),
                           Center(child: _buildLoginLink()),
                         ],
@@ -172,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             );
           },
         ),
-      ),
+
     );
   }
 

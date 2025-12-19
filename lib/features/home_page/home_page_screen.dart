@@ -15,7 +15,7 @@ class HomePageScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 18),
+            SizedBox(height: 39.h),
             TopProfileNotificationWidget(),
             SizedBox(height: 18),
             CustomCarouselWidget(

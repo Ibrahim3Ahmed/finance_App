@@ -1,4 +1,3 @@
-import 'package:encrypt_shared_preferences/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:new_learn/core/styling/app_styles.dart';
 import 'package:new_learn/core/widgets/credit_card_widget.dart';
@@ -11,18 +10,6 @@ class CardsScreen extends StatefulWidget {
 }
 
 class _CardsScreenState extends State<CardsScreen> {
-  Future<void> saveFcmToken(String token) async {
-    var prefs = await EncryptedSharedPreferences.getInstance();
-    await prefs.setString("fcm_token", token);
-    debugPrint(" FCM token saved securely: $token");
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    saveFcmToken("example_fcm_token_12345");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +48,7 @@ class _CardsScreenState extends State<CardsScreen> {
                 child: IconButton(
                   icon: const Icon(Icons.more_horiz, color: Colors.black),
                   onPressed: () {
-                    // Test reading the token
-                    readFcmToken();
+                    // Placeholder action
                   },
                 ),
               ),
@@ -87,11 +73,5 @@ class _CardsScreenState extends State<CardsScreen> {
         ],
       ),
     );
-  }
-
-  Future<void> readFcmToken() async {
-    var prefs = await EncryptedSharedPreferences.getInstance();
-    String? token = await prefs.getString("fcm_token");
-    debugPrint(" Stored FCM Token: $token");
   }
 }

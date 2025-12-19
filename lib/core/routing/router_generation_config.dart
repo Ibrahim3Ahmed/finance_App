@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:new_learn/core/routing/app_routes.dart';
 import 'package:new_learn/features/auth/CreateNewPasswordScreen.dart';
 import 'package:new_learn/features/auth/forget_password_screen.dart';
-import 'package:new_learn/features/auth/otp_verification_screen.dart';
 import 'package:new_learn/features/auth/login_screen.dart' as login;
 import 'package:new_learn/features/auth/register_screen.dart' as register;
 import 'package:new_learn/features/on_boarding_screen/on_boarding_screen.dart';
@@ -32,11 +31,7 @@ class RouterGenerationConfig {
         path: '/forget-password',
         builder: (context, state) => const ForgetPasswordScreen(),
       ),
-      GoRoute(
-        name: AppRoutes.otpScreen,
-        path: '/otp',
-        builder: (context, state) => const OtpScreen(),
-      ),
+
       GoRoute(
         name: AppRoutes.createNewPasswordScreen,
         path: '/createNewPassword',
